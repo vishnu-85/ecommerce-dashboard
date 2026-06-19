@@ -33,7 +33,7 @@ export class AuthEffects {
         this.storageService.set('user', result.user);
       }),
       tap(() => {
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/admin']);
       })
     ),
     { dispatch: false } // important
@@ -57,7 +57,7 @@ export class AuthEffects {
       ofType(AuthActions.logout),
       tap(() => {
         this.storageService.clear();
-        this.router.navigate(['/login']);
+        this.router.navigate(['/']);
       })
     ),
     { dispatch: false }

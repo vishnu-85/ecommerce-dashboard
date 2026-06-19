@@ -1,65 +1,12 @@
-<div class="app-container">
-  <aside class="sidebar">
-    <div class="logo-area">
-      <div class="logo-img"><img src="../../../assets/logo_ai.png" alt=""></div>
-    </div>
-    <div class="nav-item new-chat"><span>+</span> New chat</div>
-    <nav class="history">
-      <div class="nav-item">Search chats</div>
-      <div class="nav-item">Projects</div>
-    </nav>
-  </aside>
-
-  <main class="chat-area">
-    <div class="main-content">
-      @if(!messages.length){<h1>How can I help, {{user?.name}}?</h1>}
-      <div class="chat-messages">
-        @for (msg of messages; track msg) {
-        <div [class.user-message]="msg.isUser" [class.bot-message]="!msg.isUser">
-          @if(msg.isUser){
-          <div class="message-bubble user-bubble">
-            {{ msg.text }}
-          </div>
-          }
-          @if(!msg.isUser){
-          <div class="message-bubble bot-bubble">
-            <p><strong>Here is : </strong> {{ msg.summary }}</p>
-            @if (msg.data && msg.data.length) {
-            <div>
-               @for (item of msg.data; track $index) {
-                  <div>
-                    @for(key of getObjectKeys(item); track $index) {
-                    <p>{{ item[key] }}</p>
-                    }
-                  </div>
-                  }
-            </div>
-            }
-            @if(msg.links && msg.links.length){
-            <div class="links">
-              @for (link of msg.links; track $index) {
-              <a [routerLink]="link.url" class="detail-link">{{ link.label }}</a>
-              }
-            </div>
-            }
-          </div>
-          }
-        </div>
+<div>
+    <h1>Dashboard</h1>
+    <button (click)="loadUserList()">Load</button>
+    @if(users$ | async; as users){
+        @if(loading$ | async; as loading){
+            {{loading ? 'Loading...':''}}
         }
-      </div>
-      <form [formGroup]="chatForm" (ngSubmit)="sendMessage()">
-        <div class="input-container">
-          <input type="text" formControlName="userInput" placeholder="Ask about stock, fund, markets and industry...">
-          <button class="voice-btn" type="button"><img src="../../../assets/mic.svg" alt=""></button>
-          <button type="submit" class="d-none">Send</button>
-        </div>
-      </form>
-
-      <div class="actions">
-        <button>Create an image</button>
-        <button>Write or edit</button>
-        <button>Look something up</button>
-      </div>
-    </div>
-  </main>
+        @for (item of users; track item.id) {
+            <p>{{item.name}}</p>
+        }
+    }
 </div>
