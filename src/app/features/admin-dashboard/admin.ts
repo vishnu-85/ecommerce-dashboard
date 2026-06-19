@@ -1,19 +1,18 @@
 import { Component } from '@angular/core';
-import { selectUser } from '../../auth/store/auth.selectors';
-import * as AuthActions from '../../auth/store/auth.actions';
 import { Store } from '@ngrx/store';
 import { CommonModule } from '@angular/common';
 import { StorageService } from '../../core/services/storage.service';
-import { ChatService } from '../../shared/services/chat-bot.service';
+import { ChatService } from '../../core/services/chat-bot.service';
 import { RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { selectUser } from './store/user.selectors';
+import * as AuthActions from '../auth/store/auth.actions'
 
 @Component({
   selector: 'app-admin',
   imports: [CommonModule, RouterModule],
   standalone: true,
-  templateUrl: './admin.html',
-  styleUrl: './admin.scss',
+  templateUrl: './admin.html'
 })
 export class AdminComponent {
   user$: any;
