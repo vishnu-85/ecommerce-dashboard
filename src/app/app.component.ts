@@ -7,5 +7,5 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.component.html'
 })
 export class AppComponent {
-  protected readonly title = signal('angular21');
+  protected readonly title = signal('ecommerce-dashboard');
 }

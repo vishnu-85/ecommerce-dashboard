@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "angular21": {
+    "ecommerce-dashboard": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -31,6 +31,7 @@
               "src/styles.scss"
             ],
             "server": "src/main.server.ts",
+            "outputPath": "./dist/ecommerce-dashboard",
             "outputMode": "server",
             "ssr": {
               "entry": "src/server.ts"
@@ -64,10 +65,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "angular21:build:production"
+              "buildTarget": "ecommerce-dashboard:build:production"
             },
             "development": {
-              "buildTarget": "angular21:build:development"
+              "buildTarget": "ecommerce-dashboard:build:development"
             }
           },
           "defaultConfiguration": "development"
