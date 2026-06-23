@@ -1,0 +1,23 @@
+.page-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1.5rem 0 1rem 0;
+
+  .title-section {
+    h2 {
+      margin: 0;
+      font-weight: 500;
+    }
+    
+    .text-muted {
+      margin: 0;
+      margin-top: 0.25rem;
+      opacity: 0.7;
+    }
+  }
+}
+
+mat-divider {
+  margin-bottom: 1.5rem;
+}

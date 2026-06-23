@@ -1,41 +1,32 @@
 import { Routes } from '@angular/router';
-import { authGuard } from './core/guards/auth.guard';
-import { Dashboard } from './features/admin-dashboard/dashboard/dashboard';
-import { AdminComponent } from './features/admin-dashboard/admin';
-import { Product } from './features/admin-dashboard/product/product';
-import { Themes } from './features/admin-dashboard/themes/themes';
-import { Settings } from './features/admin-dashboard/settings/settings';
+import { authGuard } from './core/guards/auth.guard'; 
+import { AdminComponent } from './layout/main-layout/admin';
 import { LoginComponent } from './features/auth/login/login';
-
+import { DashboardComponent } from './features/dashboard/dashboard.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'admin', component: AdminComponent, canActivate: [authGuard],
-    children : [
+  {
+    path: 'admin',
+    component: AdminComponent,
+    canActivate: [authGuard],
+    children: [
       {
         path: '',
         redirectTo: 'dashboard',
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
         path: 'dashboard',
-        component: Dashboard
+        canActivate: [authGuard],
+        component: DashboardComponent,
       },
       {
-        path: 'product',
-        component: Product
+        path: 'products',
+        canActivate: [authGuard],
+        loadChildren: () => import('./features/product-management/product-management.routes').then(m => m.PRODUCT_ROUTES)
       },
-      {
-        path: 'themes',
-        component: Themes
-      },
-      {
-        path: 'settings',
-        component: Settings
-      }
-
-    ]
-   },
+    ],
+  },
 ];
-  

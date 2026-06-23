@@ -1,0 +1,112 @@
+<app-page-header 
+  title="Dashboard" 
+  subtitle="Real-time operational metrics and performance analytics overview"
+  [showAction]="true"
+  actionText="Sync Metrics"
+  actionIcon="sync"
+  (actionClick)="onRefreshDashboard()">
+</app-page-header>
+
+<div class="metrics-grid">
+  @for (metric of metrics(); track metric.title) {
+    <mat-card class="metric-card">
+      <mat-card-content>
+        <div class="metric-body">
+          <div class="metric-info">
+            <span class="mat-subtitle-2 text-secondary">{{ metric.title }}</span>
+            <h3 class="mat-headline-4 font-bold">
+              @if (metric.title.includes('Revenue')) {
+                {{ metric.value | currency:'INR':'symbol':'1.2-2' }}
+              } @else {
+                {{ metric.value }}
+              }
+            </h3>
+            
+            <div class="trend-indicator" [class.positive]="metric.trend > 0" [class.negative]="metric.trend < 0">
+              @if (metric.trend !== 0) {
+                <mat-icon class="trend-icon">
+                  {{ metric.trend > 0 ? 'arrow_upward' : 'arrow_downward' }}
+                </mat-icon>
+                <span class="mat-caption font-medium">{{ metric.trend | number:'1.1-1' }}% MoM</span>
+              } @else {
+                <span class="mat-caption text-secondary">Stable threshold level</span>
+              }
+            </div>
+          </div>
+
+          <div class="metric-icon-wrapper" [class]="metric.colorClass">
+            <mat-icon>{{ metric.icon }}</mat-icon>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  }
+</div>
+
+<div class="dashboard-details-row">
+  
+  <mat-card class="activity-card">
+    <mat-card-header>
+      <mat-card-title>Recent Global Operations</mat-card-title>
+      <mat-card-subtitle>Latest transactions captured within active queues</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      
+      <table mat-table [dataSource]="recentActivities()" class="full-width-table">
+        
+        <ng-container matColumnDef="reference">
+          <th mat-header-cell *matHeaderCellDef> Ref. Number </th>
+          <td mat-cell *matCellDef="let item" class="font-medium"> {{item.reference}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="customer">
+          <th mat-header-cell *matHeaderCellDef> Customer Entity </th>
+          <td mat-cell *matCellDef="let item"> {{item.customer}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="amount">
+          <th mat-header-cell *matHeaderCellDef> Total Value </th>
+          <td mat-cell *matCellDef="let item"> {{item.amount | currency}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef> Processing Status </th>
+          <td mat-cell *matCellDef="let item">
+            <span class="status-badge" [class]="item.status.toLowerCase()">
+              {{item.status}}
+            </span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="timestamp">
+          <th mat-header-cell *matHeaderCellDef> Timestamp </th>
+          <td mat-cell *matCellDef="let item"> {{item.timestamp | date:'shortTime'}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="status-widget">
+    <mat-card-header>
+      <mat-card-title>System Health</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="widget-center">
+      <div class="status-ring" [class.alert]="systemAlertCount() > 0">
+        <mat-icon class="status-main-icon">
+          {{ systemAlertCount() > 0 ? 'report_problem' : 'check_circle' }}
+        </mat-icon>
+        <h4 class="mat-headline-6">
+          {{ systemAlertCount() > 0 ? systemAlertCount() + ' Alerts Pending' : 'All Systems Nominal' }}
+        </h4>
+        <p class="mat-body-2 text-secondary text-center">
+          Gateway channels sync verified across global availability zones.
+        </p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+</div>

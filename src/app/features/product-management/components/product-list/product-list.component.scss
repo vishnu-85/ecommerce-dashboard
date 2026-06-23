@@ -1,0 +1,104 @@
+.filter-card {
+  margin-bottom: 1.5rem;
+  border-radius: 6px;
+  background-color: #fafafa;
+  border: 1px solid rgba(0,0,0,0.03);
+
+  .filter-form-layout {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    padding: 1rem !important;
+
+    .search-field { flex: 2; min-width: 280px; }
+    .dropdown-field { flex: 1; min-width: 180px; }
+    
+    ::ng-deep .mat-mdc-form-field-subscript-wrapper { display: none; }
+  }
+}
+
+.table-container-card {
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+
+  .enterprise-table {
+    width: 100%;
+    background: transparent;
+
+    .sku-cell {
+      font-family: 'Roboto Mono', monospace;
+      font-weight: 500;
+      color: #5c6bc0;
+    }
+
+    .name-desc-wrapper {
+      display: flex;
+      flex-direction: column;
+      padding: 0.5rem 0;
+
+      .caption-muted {
+        font-size: 0.785rem;
+        opacity: 0.6;
+        margin-top: 0.15rem;
+      }
+      .text-truncate {
+        max-width: 320px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    .stock-indicator {
+      font-weight: 500;
+      &.out-of-stock {
+        color: #d32f2f;
+        background-color: #ffebee;
+        padding: 0.2rem 0.4rem;
+        border-radius: 4px;
+      }
+    }
+
+    .badge {
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+
+      &.active { background-color: #e8f5e9; color: #2e7d32; }
+      &.draft { background-color: #eceff1; color: #37474f; }
+      &.archived { background-color: #ffebee; color: #c62828; }
+    }
+
+    .empty-state-row {
+      text-align: center;
+      padding: 4rem 1rem !important;
+      opacity: 0.5;
+
+      mat-icon {
+        font-size: 48px;
+        width: 48px;
+        height: 48px;
+        margin-bottom: 0.5rem;
+      }
+      p { margin: 0; font-size: 1rem; }
+    }
+  }
+}
+
+.text-right { text-align: right; }
+.text-center { text-align: center; }
+.font-medium { font-weight: 500; }
+
+:host-context(.dark-theme) {
+  .filter-card { background-color: #1a1a1a; }
+  .table-container-card { background-color: #121212; }
+  .table-container-card .enterprise-table .badge {
+    &.active { background-color: rgba(46,125,50,0.15); color: #81c784; }
+    &.draft { background-color: rgba(255,255,255,0.1); color: #b0bec5; }
+    &.archived { background-color: rgba(198,40,40,0.15); color: #e57373; }
+  }
+}

@@ -6,12 +6,12 @@ import * as UserActions from '../store/user.actions';
 import { selectLoading, selectUser } from '../store/user.selectors';
 import { Observable } from 'rxjs';
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-user',
   imports: [CommonModule, RouterModule],
   standalone: true,
-  templateUrl: './dashboard.html',
+  templateUrl: './user.component.html',
 })
-export class Dashboard {
+export class UserComponent {
   users$!: Observable<any>;
   loading$!: Observable<any>;
   constructor(private store: Store) {
