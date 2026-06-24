@@ -54,42 +54,9 @@ export class ProductFormComponent implements OnInit {
     if (id && id !== 'new') {
       this.isEditMode.set(true);
       this.targetProductId = id;
-      this.hydrateFormValue(id);
+      
     }
   }
-
-  private hydrateFormValue(id: string): void {
-    // Read entity stream straight from memory sync during this stage iteration
-    const existingProduct = this.productService.products().find(p => p.id === id);
-    if (existingProduct) {
-      this.productForm.patchValue({
-        sku: existingProduct.sku,
-        name: existingProduct.name,
-        category: existingProduct.category,
-        price: existingProduct.price,
-        stockQuantity: existingProduct.stockQuantity,
-        status: existingProduct.status,
-        description: existingProduct.description
-      });
-    } else {
-      this.snackBar.open('Target product data record was not discovered.', 'Close', { duration: 4000 });
-      this.router.navigate(['/products']);
-    }
-  }
-
-  onSaveAsset(): void {
-    if (this.productForm.invalid) return;
-
-    const aggregatePayload = {
-      ...this.productForm.getRawValue(),
-      ...(this.targetProductId ? { id: this.targetProductId } : {})
-    };
-
-    this.productService.saveProduct(aggregatePayload).subscribe({
-      next: () => {
-        this.snackBar.open(`Product compilation saved successfully.`, 'Success', { duration: 3000 });
-        this.router.navigate(['/products']);
-      }
-    });
-  }
+ 
+  onSaveAsset(): void {}
 }

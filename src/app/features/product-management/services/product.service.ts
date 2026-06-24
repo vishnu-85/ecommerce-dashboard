@@ -2,11 +2,14 @@ import { Injectable, signal, computed, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, delay, of, tap } from 'rxjs';
 import { Product, ProductFilters } from '../models/product.models';
+import { APIENDPOINT } from '../../../core/apiEndpoint/api-end-points';
+import { environment } from '../../../../environments/environment'
 
 @Injectable()
 export class ProductService {
-  private readonly http = inject(HttpClient);
-  private readonly apiEndpoint = '/api/v1/products';
+  private readonly httpClient = inject(HttpClient);
+  
+  public baseUrl = environment.apiUrl;
 
   // 1. Writable state signals (Private encapsulation)
   private readonly _products = signal<Product[]>([]);
@@ -20,7 +23,7 @@ export class ProductService {
   
   // Derived analytical computations
   readonly activeProductsCount = computed(() => 
-    this._products().filter(p => p.status === 'Active').length
+    this._products().filter(p => p.availabilityStatus === 'Active').length
   );
 
   // Computed state filtering mimicking a backend server operation for the presentation layer
@@ -41,7 +44,7 @@ export class ProductService {
     }
 
     if (currentFilters.status) {
-      result = result.filter(p => p.status === currentFilters.status);
+      result = result.filter(p => p.availabilityStatus === currentFilters.status);
     }
 
     return result;
@@ -58,33 +61,58 @@ export class ProductService {
   loadProducts(): void {
     this._loading.set(true);
     
-    // Fallback Mock data matching enterprise structure until API Integration Phase
-    const mockProducts: Product[] = [
-      { id: 'p1', sku: 'SKU-APP-10', name: 'Enterprise Cloud Portal Integration License', description: 'Annual SaaS node subscription base package.', price: 2499.00, stockQuantity: 500, category: 'Software', status: 'Active', updatedAt: new Date() },
-      { id: 'p2', sku: 'SKU-HW-88', name: 'Edge Gateway Analytics Router v4', description: 'Industrial IoT routing terminal device.', price: 849.50, stockQuantity: 34, category: 'Hardware', status: 'Active', updatedAt: new Date() },
-      { id: 'p3', sku: 'SKU-SRV-02', name: 'Managed Kubernetes DevOps Support Block', description: '24/7 dedicated site reliability consulting contract hours.', price: 4500.00, stockQuantity: 12, category: 'Services', status: 'Draft', updatedAt: new Date() },
-      { id: 'p4', sku: 'SKU-HW-12', name: 'Biometric Access Control Terminal', description: 'Next-gen optical secure authentication node unit.', price: 1200.00, stockQuantity: 0, category: 'Hardware', status: 'Archived', updatedAt: new Date() }
-    ];
 
-    // Simulating light network debounce latency
-    setTimeout(() => {
-      this._products.set(mockProducts);
+    this.httpClient.get(this.baseUrl+APIENDPOINT.products).pipe().subscribe({
+      next:(res:any)=>{
+        let prodlist = res.products;
+        prodlist =  prodlist.map((e:any)=>{
+           return{...e, status: 'Active'}
+          });
+      this._products.set(prodlist);
       this._loading.set(false);
-    }, 400);
+      },
+      error:(err)=>{
+       this._loading.set(false);
+      }
+    })
+    
   }
 
   saveProduct(productData: Partial<Product>): Observable<Product> {
     this._loading.set(true);
     const newProduct: Product = {
-      id: productData.id || `p_${Date.now()}`,
-      sku: productData.sku || 'SKU-GEN-00',
-      name: productData.name || 'Unnamed Corporate Asset',
+      id: productData.id || 0,
+      title: productData.title || '',
+      name: productData.title || '',
       description: productData.description || '',
+      category: productData.category || '',
       price: productData.price || 0,
-      stockQuantity: productData.stockQuantity || 0,
-      category: productData.category || 'General',
-      status: productData.status || 'Draft',
-      updatedAt: new Date()
+      discountPercentage: productData.discountPercentage || 0,
+      rating: productData.rating || 0,
+      stock: productData.stock || 0,
+      tags: productData.tags || [],
+      brand: productData.brand || '',
+      sku: productData.sku || '',
+      weight: productData.weight || 0,
+      dimensions: productData.dimensions || { 
+        width: 0,
+        height: 0,
+        depth: 0,
+      },
+      warrantyInformation: productData.warrantyInformation || '',
+      shippingInformation: productData.shippingInformation || '',
+      availabilityStatus: productData.availabilityStatus || '',
+      reviews: productData.reviews || [],
+      returnPolicy: productData.returnPolicy || '',
+      minimumOrderQuantity: productData.minimumOrderQuantity || 0,
+      meta: productData.meta || { createdAt: '',
+        updatedAt: '',
+        barcode: '',
+        qrCode: ''
+      },
+      images: productData.images || [],
+      thumbnail: productData.thumbnail || '',
+      status: 'Active'
     };
 
     return of(newProduct).pipe(

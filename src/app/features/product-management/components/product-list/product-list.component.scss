@@ -92,7 +92,7 @@
 .text-right { text-align: right; }
 .text-center { text-align: center; }
 .font-medium { font-weight: 500; }
-
+.thumbnail { width: 50px; height: 50px;}
 :host-context(.dark-theme) {
   .filter-card { background-color: #1a1a1a; }
   .table-container-card { background-color: #121212; }

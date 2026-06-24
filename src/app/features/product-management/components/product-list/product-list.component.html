@@ -43,14 +43,18 @@
   }
   
   <table mat-table [dataSource]="productService.filteredProducts()" class="enterprise-table">
-    
+     <ng-container matColumnDef="thumbnail">
+      <th mat-header-cell *matHeaderCellDef> Product Image </th>
+      <td mat-cell *matCellDef="let prod" class="sku-cell"><img class="thumbnail" [src]="prod.thumbnail" alt="{{prod.name}}"></td>
+    </ng-container>
+
     <ng-container matColumnDef="sku">
       <th mat-header-cell *matHeaderCellDef> Internal SKU </th>
       <td mat-cell *matCellDef="let prod" class="sku-cell"> {{ prod.sku }} </td>
     </ng-container>
 
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Commercial Name </th>
+      <th mat-header-cell *matHeaderCellDef> Product Name </th>
       <td mat-cell *matCellDef="let prod">
         <div class="name-desc-wrapper">
           <span class="font-medium text-primary-dark">{{ prod.name }}</span>

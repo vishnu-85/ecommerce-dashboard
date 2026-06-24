@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
-import { CurrencyPipe } from '@angular/common';
+import { RouterLink, RouterModule } from '@angular/router';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
@@ -9,19 +9,19 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
-import { ProductService } from '../../services/product.service';
+import { OrderService } from '../../services/order.service';
 import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header.component';
-import { Product } from '../../models/product.models';
 
 @Component({
-  selector: 'app-product-list',
+  selector: 'app-order-list',
   standalone: true,
   imports: [
     FormsModule,
-    RouterLink,
+    RouterModule,
     MatTableModule,
     MatCardModule,
     MatInputModule,
@@ -29,33 +29,25 @@ import { Product } from '../../models/product.models';
     MatSelectModule,
     MatButtonModule,
     MatIconModule,
+    MatChipsModule,
     MatProgressBarModule,
     MatTooltipModule,
     PageHeaderComponent,
-    CurrencyPipe
+    CurrencyPipe,
+    DatePipe
   ],
-  templateUrl: './product-list.component.html',
-  styleUrl: './product-list.component.scss'
+  templateUrl: './order-list.component.html',
+  styleUrl: './order-list.component.scss'
 })
-export class ProductListComponent {
-  readonly productService = inject(ProductService);
-  private readonly router = inject(Router);
+export class OrderListComponent {
+  readonly orderService = inject(OrderService);
+  readonly displayedColumns: string[] = ['orderNumber', 'customer', 'date', 'amount', 'status', 'actions'];
 
-  readonly displayedColumns: string[] = ['thumbnail','sku', 'name', 'category', 'price', 'stock', 'status', 'actions'];
-
-  onSearchChange(searchTerm: string): void {
-    this.productService.updateFilters({ search: searchTerm });
+  onQuerySearch(term: string): void {
+    this.orderService.updateFilters({ search: term });
   }
 
-  onCategoryChange(cat: string): void {
-    this.productService.updateFilters({ category: cat });
-  }
-
-  onStatusChange(stat: string): void {
-    this.productService.updateFilters({ status: stat });
-  }
-
-  onRouteToCreate(): void {
-    this.router.navigate(['/admin/products/manage'+'/new']);
+  onStatusFilter(statusVal: string): void {
+    this.orderService.updateFilters({ status: statusVal });
   }
 }

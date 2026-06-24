@@ -1,0 +1,98 @@
+@if (targetOrder(); as order) {
+  <app-page-header
+    [title]="'Audit Ledger File: ' + order.orderNumber"
+    [subtitle]="'Detailed accounting receipt parameters, delivery coordinates, and transit node modification matrix'">
+  </app-page-header>
+
+  <div class="detail-layout">
+    <div class="summary-lane">
+      <mat-card class="info-card">
+        <mat-card-header>
+          <mat-card-title>Logistics Summary</mat-card-title>
+          
+          <div class="header-actions">
+            <button mat-flat-button color="accent" [matMenuTriggerFor]="statusMenu">
+              Workflow Transition <mat-icon>expand_more</mat-icon>
+            </button>
+            <mat-menu #statusMenu="matMenu">
+              <button mat-menu-item (click)="onChangeState('Processing')">Mark Processing</button>
+              <button mat-menu-item (click)="onChangeState('Shipped')">Dispatch Transit (Shipped)</button>
+              <button mat-menu-item (click)="onChangeState('Delivered')">Verify Final Delivery</button>
+              <button mat-menu-item (click)="onChangeState('Cancelled')" class="text-danger">Void Transaction</button>
+            </mat-menu>
+          </div>
+        </mat-card-header>
+
+        <mat-card-content class="grid-specs">
+          <div class="spec-node">
+            <span class="label">Workflow State</span>
+            <span class="value state-text font-bold text-uppercase">{{ order.status }}</span>
+          </div>
+          <div class="spec-node">
+            <span class="label">Client Corporate Entity</span>
+            <span class="value">{{ order.customerName }}</span>
+          </div>
+          <div class="spec-node">
+            <span class="label">Authorized Channels Communication</span>
+            <span class="value">{{ order.customerEmail }}</span>
+          </div>
+          <div class="spec-node">
+            <span class="label">Initial Generation Stamp</span>
+            <span class="value">{{ order.createdAt | date:'medium' }}</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="info-card">
+        <mat-card-header>
+          <mat-card-title>Shipping Matrix Coordinates</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p class="mat-body-1 Address-block">
+            {{ order.shippingAddress.street }}<br />
+            {{ order.shippingAddress.city }}, {{ order.shippingAddress.state }} {{ order.shippingAddress.postalCode }}<br />
+            <strong>{{ order.shippingAddress.country }}</strong>
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <mat-card class="ledger-card">
+      <mat-card-header>
+        <mat-card-title>Itemized Transaction Manifest</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <table mat-table [dataSource]="order.items" class="items-table">
+          
+          <ng-container matColumnDef="product">
+            <th mat-header-cell *matHeaderCellDef> Asset Statement Module </th>
+            <td mat-cell *matCellDef="let item"> {{ item.productName }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef class="right-text"> Unit Valuation </th>
+            <td mat-cell *matCellDef="let item" class="right-text"> {{ item.unitPrice | currency:'INR':'symbol':'1.2-2' }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="quantity">
+            <th mat-header-cell *matHeaderCellDef class="center-text"> Units Count </th>
+            <td mat-cell *matCellDef="let item" class="center-text"> {{ item.quantity }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="total">
+            <th mat-header-cell *matHeaderCellDef class="right-text"> Absolute Value </th>
+            <td mat-cell *matCellDef="let item" class="right-text font-bold"> {{ item.totalPrice | currency:'INR':'symbol':'1.2-2'}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="itemColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: itemColumns;"></tr>
+        </table>
+
+        <div class="aggregate-footer">
+          <span class="total-label">Total Audited Balance:</span>
+          <span class="total-amount">{{ order.totalAmount | currency:'INR':'symbol':'1.2-2' }}</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+}

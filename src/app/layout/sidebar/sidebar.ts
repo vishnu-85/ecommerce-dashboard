@@ -15,6 +15,7 @@ import * as AuthActions from '../../features/auth/store/auth.actions'
     <nav class="history">
       <a routerLink="dashboard"><div class="nav-item">Dashboard</div></a>
       <a routerLink="products"><div class="nav-item">Products</div></a>
+      <a routerLink="orders"><div class="nav-item">Orders</div></a>
     </nav>
   </aside>
 `

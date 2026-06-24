@@ -1,0 +1,74 @@
+.query-card {
+  margin-bottom: 1.5rem;
+  background-color: #fafafa;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+
+  .query-bar {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1rem !important;
+
+    .search-input { flex: 3; }
+    .filter-dropdown { flex: 1; }
+    ::ng-deep .mat-mdc-form-field-subscript-wrapper { display: none; }
+  }
+}
+
+.table-frame {
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+
+  .enterprise-grid {
+    width: 100%;
+    background: transparent;
+
+    .code-font {
+      font-family: 'Roboto Mono', monospace;
+      color: #3f51b5;
+      font-weight: 500;
+    }
+
+    .identity-stack {
+      display: flex;
+      flex-direction: column;
+      padding: 0.5rem 0;
+
+      .subtext {
+        font-size: 0.75rem;
+        opacity: 0.6;
+      }
+    }
+
+    .status-token {
+      font-size: 0.725rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 0.3rem 0.6rem;
+      border-radius: 20px;
+      letter-spacing: 0.25px;
+
+      &.pending { background-color: #e3f2fd; color: #0d47a1; }
+      &.processing { background-color: #fff3e0; color: #e65100; }
+      &.shipped { background-color: #f3e5f5; color: #4a148c; }
+      &.delivered { background-color: #e8f5e9; color: #1b5e20; }
+      &.cancelled { background-color: #ffebee; color: #b71c1c; }
+    }
+  }
+}
+
+.numeric-alignment { text-align: right; }
+.center-alignment { text-align: center; }
+.font-bold { font-weight: 500; }
+
+:host-context(.dark-theme) {
+  .query-card { background-color: #1a1a1a; }
+  .table-frame { background-color: #121212; }
+  .table-frame .enterprise-grid .status-token {
+    &.pending { background-color: rgba(13, 71, 161, 0.25); color: #64b5f6; }
+    &.processing { background-color: rgba(230, 81, 0, 0.25); color: #ffb74d; }
+    &.shipped { background-color: rgba(74, 20, 140, 0.25); color: #ba68c8; }
+    &.delivered { background-color: rgba(27, 94, 32, 0.25); color: #81c784; }
+    &.cancelled { background-color: rgba(183, 28, 28, 0.25); color: #e57373; }
+  }
+}
