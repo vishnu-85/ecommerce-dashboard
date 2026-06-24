@@ -9,32 +9,6 @@ A modern, scalable, and enterprise-grade E-Commerce Admin Dashboard built with *
 
 ---
 
-# 📖 Table of Contents
-
-- Overview
-- Features
-- Tech Stack
-- Architecture
-- Project Structure
-- Screenshots
-- Getting Started
-- Installation
-- Environment Configuration
-- Running the Application
-- Build & Deployment
-- Authentication & Authorization
-- State Management
-- API Integration
-- Coding Standards
-- Performance Optimizations
-- Testing
-- Security
-- Roadmap
-- Contributing
-- Author
-- License
-
----
 
 # 🚀 Overview
 
@@ -48,7 +22,6 @@ The E-Commerce Dashboard is a comprehensive admin panel that enables administrat
 - Track Inventory
 - Generate Reports
 - Manage Users & Roles
-- Monitor Business KPIs
 
 Built using the latest Angular 21 features including:
 
@@ -75,7 +48,6 @@ Built using the latest Angular 21 features including:
 - Top Selling Products
 - Recent Orders
 - Revenue Analytics
-- KPI Widgets
 
 ---
 
@@ -132,7 +104,6 @@ Built using the latest Angular 21 features including:
 - Customer List
 - Customer Profile
 - Customer Orders
-- Customer Activity
 - Customer Search
 - Customer Segmentation
 
@@ -159,12 +130,6 @@ Built using the latest Angular 21 features including:
 - Customer Reports
 - Revenue Reports
 - Inventory Reports
-
-### Export Options
-
-- Excel
-- CSV
-- PDF
 
 ---
 
