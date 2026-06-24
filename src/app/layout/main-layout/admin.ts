@@ -5,7 +5,7 @@ import { StorageService } from '../../core/services/storage.service';
 import { ChatService } from '../../core/services/chat-bot.service';
 import { RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { selectUser } from '../../features/admin-dashboard/store/user.selectors';
+import { selectUser } from '../../features/users/store/user.selectors';
 import * as AuthActions from '../../features/auth/store/auth.actions'
 import { SidebarComponent } from '../sidebar/sidebar';
 
