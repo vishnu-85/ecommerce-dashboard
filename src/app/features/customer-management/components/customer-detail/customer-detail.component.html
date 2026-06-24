@@ -1,0 +1,119 @@
+@if (customerProfile(); as profile) {
+  <app-page-header
+    [title]="'Account Profile: ' + profile.companyName"
+    [subtitle]="'Comprehensive commercial entity ledger parameters, credit usage matrix indicators, and risk tiering status'">
+  </app-page-header>
+
+  <div class="profile-layout-grid">
+    <div class="left-card-lane">
+      
+      <!-- Primary Profile Identity Panel -->
+      <mat-card class="detail-card-item">
+        <mat-card-header>
+          <mat-card-title>Account Allocation Matrix</mat-card-title>
+          <div class="contextual-action-anchor">
+            <button mat-flat-button color="primary" [matMenuTriggerFor]="lifecycleMenu">
+              Alter State <mat-icon>tune</mat-icon>
+            </button>
+            <mat-menu #lifecycleMenu="matMenu">
+              <button mat-menu-item (click)="onTransitionState('Active')">Authorize Account (Active)</button>
+              <button mat-menu-item (click)="onTransitionState('Inactive')">Mark Inactive (Dormant)</button>
+              <button mat-menu-item (click)="onTransitionState('Suspended')" class="alert-action">Suspend Account (Freeze Credit)</button>
+            </mat-menu>
+          </div>
+        </mat-card-header>
+        <mat-card-content class="structural-specs">
+          <div class="field-node">
+            <span class="label">System Index Identifier</span>
+            <span class="val system-code">{{ profile.accountNumber }}</span>
+          </div>
+          <div class="field-node">
+            <span class="label">Compliance Control State</span>
+            <span class="val text-weight status-badge" [class]="profile.status.toLowerCase()">{{ profile.status }}</span>
+          </div>
+          <div class="field-node">
+            <span class="label">Assigned Portfolio Value Tier</span>
+            <span class="val text-weight">{{ profile.tier }} Engagement</span>
+          </div>
+          <div class="field-node">
+            <span class="label">Original Registry Horizon</span>
+            <span class="val">{{ profile.onboardingDate | date:'longDate' }}</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Communication Point-of-Contact -->
+      <mat-card class="detail-card-item">
+        <mat-card-header>
+          <mat-card-title>Assigned Organizational Agent</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="structural-specs">
+          <div class="field-node">
+            <span class="label">Corporate Representative</span>
+            <span class="val text-weight">{{ profile.contact.primaryName }}</span>
+          </div>
+          <div class="field-node">
+            <span class="label">Functional Role Assignment</span>
+            <span class="val">{{ profile.contact.designation }}</span>
+          </div>
+          <div class="field-node">
+            <span class="label">Encrypted Channels Endpoint</span>
+            <span class="val">{{ profile.contact.primaryEmail }}</span>
+          </div>
+          <div class="field-node">
+            <span class="label">Secure Voice Core</span>
+            <span class="val">{{ profile.contact.primaryPhone }}</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- Commercial Financial Risk Analyzer Matrix -->
+    <mat-card class="right-card-lane financial-intelligence-card">
+      <mat-card-header>
+        <mat-card-title>Capital Utilization & Balance Sheet Audit</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="financial-metric-dashboard">
+          <div class="metric-block-box">
+            <span class="metric-label">Aggregated Lifetime Revenue</span>
+            <span class="metric-value aggregate-gain">{{ profile.financials.lifetimeValue | currency:'INR':'symbol':'1.2-2' }}</span>
+          </div>
+          <div class="metric-block-box">
+            <span class="metric-label">Active Outstanding Receivables</span>
+            <span class="metric-value debt-risk">{{ profile.financials.outstandingBalance | currency:'INR':'symbol':'1.2-2' }}</span>
+          </div>
+        </div>
+
+        <div class="credit-risk-meter-lane">
+          <div class="meter-text-meta">
+            <span class="label-heading">Commercial Line Exposure Utilization</span>
+            <span class="percentage-readout text-weight">{{ usageRatio() | percent:'1.1-2' }}</span>
+          </div>
+          
+          <mat-progress-bar 
+            mode="determinate" 
+            [value]="usageRatio() * 100" 
+            [color]="usageRatio() > 0.85 ? 'warn' : 'primary'"
+            class="risk-bar">
+          </mat-progress-bar>
+
+          <div class="limitation-boundaries">
+            <span>Utilized: <strong>{{ profile.financials.creditUtilized | currency:'INR':'symbol':'1.2-2' }}</strong></span>
+            <span>Total Limit allocation: <strong>{{ profile.financials.creditLimit | currency:'INR':'symbol':'1.2-2' }}</strong></span>
+          </div>
+        </div>
+
+        @if (usageRatio() > 0.85) {
+          <div class="credit-breach-alert">
+            <mat-icon>warning</mat-icon>
+            <div class="alert-body">
+              <span class="alert-title">High Exposure Warning Threshold</span>
+              <p class="alert-desc">This entity has consumed greater than 85% of its authorized credit facility allocation. System triggers require supervisory override approval before releasing new outbound logistics shipments.</p>
+            </div>
+          </div>
+        }
+      </mat-card-content>
+    </mat-card>
+  </div>
+}

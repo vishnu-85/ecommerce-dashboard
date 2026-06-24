@@ -1,0 +1,135 @@
+.profile-layout-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1rem;
+  @media (max-width: 992px) { grid-template-columns: 1fr; }
+
+  .left-card-lane {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .detail-card-item {
+    border-radius: 6px;
+    border: 1px solid rgba(0,0,0,0.04);
+
+    mat-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      padding-bottom: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .structural-specs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      padding: 0.25rem 0;
+
+      .field-node {
+        display: flex;
+        flex-direction: column;
+
+        .label {
+          font-size: 0.725rem;
+          opacity: 0.55;
+          text-transform: uppercase;
+          letter-spacing: 0.25px;
+          margin-bottom: 0.2rem;
+        }
+        .val { font-size: 0.95rem; color: #37474f; }
+        .system-code { font-family: 'Roboto Mono', monospace; color: #00796b; font-weight: 500; }
+      }
+    }
+  }
+
+  .financial-intelligence-card {
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+
+    .financial-metric-dashboard {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+
+      .metric-block-box {
+        background-color: #fcfcfc;
+        border: 1px solid rgba(0,0,0,0.03);
+        padding: 1.25rem;
+        border-radius: 4px;
+        display: flex;
+        flex-direction: column;
+
+        .metric-label { font-size: 0.75rem; opacity: 0.6; text-transform: uppercase; margin-bottom: 0.35rem; }
+        .metric-value { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.5px; }
+        .aggregate-gain { color: #2e7d32; }
+        .debt-risk { color: #c62828; }
+      }
+    }
+
+    .credit-risk-meter-lane {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1.5rem;
+
+      .meter-text-meta {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+        .label-heading { font-size: 0.85rem; color: #546e7a; }
+        .percentage-readout { font-size: 1rem; }
+      }
+
+      .risk-bar { height: 8px; border-radius: 4px; }
+
+      .limitation-boundaries {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.775rem;
+        opacity: 0.7;
+        margin-top: 0.5rem;
+      }
+    }
+
+    .credit-breach-alert {
+      background-color: #fff3e0;
+      border-left: 4px solid #ef6c00;
+      color: #e65100;
+      padding: 1rem;
+      border-radius: 0 4px 4px 0;
+      display: flex;
+      gap: 0.75rem;
+
+      mat-icon { font-size: 24px; width: 24px; height: 24px; }
+      .alert-body {
+        display: flex;
+        flex-direction: column;
+        .alert-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.15rem; }
+        .alert-desc { margin: 0; font-size: 0.825rem; line-height: 1.4; opacity: 0.9; }
+      }
+    }
+  }
+}
+
+.text-weight { font-weight: 500; }
+.alert-action { color: #c62828 !important; }
+
+:host-context(.dark-theme) {
+  .detail-card-item, .financial-intelligence-card { background-color: #121212; }
+  .profile-layout-grid .detail-card-item .structural-specs .field-node .val { color: #cfd8dc; }
+  .profile-layout-grid .financial-intelligence-card .financial-metric-dashboard .metric-block-box {
+    background-color: #1a1a1a;
+    .aggregate-gain { color: #81c784; }
+    .debt-risk { color: #e57373; }
+  }
+  .profile-layout-grid .financial-intelligence-card .credit-breach-alert {
+    background-color: rgba(239, 108, 0, 0.15);
+    color: #ffb74d;
+  }
+}

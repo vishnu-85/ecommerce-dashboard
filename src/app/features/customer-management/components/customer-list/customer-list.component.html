@@ -1,0 +1,92 @@
+<app-page-header
+  title="Customers Management"
+  subtitle="Audit commercial client corporate profiles, verify organizational validation parameters, and manage credit profiles">
+</app-page-header>
+
+<mat-card class="filter-dashboard">
+  <mat-card-content class="filter-layout-bar">
+    <mat-form-field appearance="outline" class="flex-grow-3">
+      <mat-label>Search Registries</mat-label>
+      <mat-icon matPrefix>search</mat-icon>
+      <input matInput [ngModel]="customerService.filters().search" (ngModelChange)="onSearchChange($event)" placeholder="Filter by Account ID, Corporate Title, or Rep..." />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="flex-grow-1">
+      <mat-label>Portfolio Tier</mat-label>
+      <mat-select [ngModel]="customerService.filters().tier" (ngModelChange)="onTierChange($event)">
+        <mat-option value="">All Standard Tiers</mat-option>
+        <mat-option value="Platinum">Platinum Level</mat-option>
+        <mat-option value="Gold">Gold Level</mat-option>
+        <mat-option value="Silver">Silver Level</mat-option>
+        <mat-option value="Standard">Standard Tier</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="flex-grow-1">
+      <mat-label>Account Lifecycle State</mat-label>
+      <mat-select [ngModel]="customerService.filters().status" (ngModelChange)="onStatusChange($event)">
+        <mat-option value="">All Classifications</mat-option>
+        <mat-option value="Active">Active Validated</mat-option>
+        <mat-option value="Inactive">Inactive Dormant</mat-option>
+        <mat-option value="Suspended">Suspended Flagged</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="registry-frame">
+  @if (customerService.loading()) {
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  }
+
+  <table mat-table [dataSource]="customerService.filteredCustomers()" class="portfolio-grid">
+    
+    <ng-container matColumnDef="accountNumber">
+      <th mat-header-cell *matHeaderCellDef> Account Ledger Reference </th>
+      <td mat-cell *matCellDef="let cust" class="system-id"> {{ cust.accountNumber }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="company">
+      <th mat-header-cell *matHeaderCellDef> Corporate Entity & Primary Agent </th>
+      <td mat-cell *matCellDef="let cust">
+        <div class="profile-stack">
+          <span class="primary-firm">{{ cust.companyName }}</span>
+          <span class="secondary-agent">{{ cust.contact.primaryName }} — {{ cust.contact.designation }}</span>
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="tier">
+      <th mat-header-cell *matHeaderCellDef> Service Allocation Tier </th>
+      <td mat-cell *matCellDef="let cust">
+        <span class="tier-indicator" [class]="cust.tier.toLowerCase()">{{ cust.tier }}</span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ltv">
+      <th mat-header-cell *matHeaderCellDef class="numeric-alignment"> Aggregated LTV </th>
+      <td mat-cell *matCellDef="let cust" class="numeric-alignment numeric-weight"> {{ cust.financials.lifetimeValue | currency:'INR':'symbol':'1.2-2' }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> Operational Compliance State </th>
+      <td mat-cell *matCellDef="let cust">
+        <span class="compliance-badge" [class]="cust.status.toLowerCase()">
+          {{ cust.status }}
+        </span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef class="center-alignment"> Portfolio Actions </th>
+      <td mat-cell *matCellDef="let cust" class="center-alignment">
+        <button mat-icon-button color="primary" [routerLink]="[cust.id]" matTooltip="Inspect Core Account Matrix">
+          <mat-icon>analytics</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</mat-card>
