@@ -208,19 +208,19 @@ Compatible with:
 
 - Node.js
 - Express.js
-- NestJS
-- Spring Boot
+<!-- - NestJS -->
+<!-- - Spring Boot
 - .NET Core
-- Django
+- Django -->
 
 ---
 
 ## Database
 
-- MongoDB
+<!-- - MongoDB -->
 - PostgreSQL
-- MySQL
-- SQL Server
+<!-- - MySQL
+- SQL Server -->
 
 ---
 
@@ -297,7 +297,7 @@ src
 ```
 
 ---
-
+<!-- 
 # 📷 Screenshots
 
 ## Dashboard
@@ -316,7 +316,7 @@ src
 
 ![Customers](docs/screenshots/customers.png)
 
----
+--- -->
 
 # ⚙️ Getting Started
 
