@@ -96,7 +96,7 @@ p{
   color: var(--color-text-dark);
 }
 
-input {
+input, textarea, select {
   width: 100%;
   padding: 12px;
   border: 2px solid var(--color-border-light);
@@ -108,7 +108,10 @@ input {
 input:focus {
   border-color: var(--color-primary-teal);
 }
-
+textarea{
+  min-height: 200px;
+  max-height: 300px;
+}
 .btn-primary {
   width: 100%;
   padding: 12px;
@@ -127,6 +130,25 @@ input:focus {
   transform: translateY(-2px);
 }
 
+button{
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.add-btn{
+  margin: 5px;
+  font-size: 11px;
+  background: linear-gradient(100.93deg, #17C3A9 8.18%, #19CF8E 92.72%);
+  color: var(--color-text-light);
+}
+.remove-btn{
+   margin: 5px;
+   font-size: 11px;
+   background: linear-gradient(100.93deg, #ed2f2c 8.18%, #f43715 92.72%);
+   color: var(--color-text-light);
+}
 
 // Dashbioard
 

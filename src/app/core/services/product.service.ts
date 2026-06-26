@@ -61,6 +61,10 @@ export class ProductService {
   loadProducts(){
    return this.httpClient.get(`${this.baseUrl}${APIENDPOINT.products}`);
   }
+ 
+  getProductsById(id:number){
+   return this.httpClient.get(`${this.baseUrl}${APIENDPOINT.products}/${id}`);
+  }
 
   getCategory(){
     return this.httpClient.get(`${this.baseUrl}${APIENDPOINT.products}/${APIENDPOINT.categories}`);

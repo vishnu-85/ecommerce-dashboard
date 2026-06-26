@@ -34,7 +34,7 @@ export class AuthEffects {
         this.storageService.set('user', result.user);
       }),
       tap(() => {
-        this.router.navigate(['/admin']);
+        this.router.navigate(['/admin/dashboard']);
       })
     ),
     { dispatch: false } // important

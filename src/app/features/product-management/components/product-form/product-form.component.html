@@ -1,71 +1,181 @@
-<app-page-header
-  [title]="isEditMode() ? 'Edit Product' : 'Add new Product'"
-  [subtitle]="isEditMode() ? 'Modify active market configurations and parameters' : 'Onboard structural item inventories into regional distribution channels'">
+<app-page-header [title]="isEditMode ? 'Edit Product' : 'Add new Product'"
+  [subtitle]="isEditMode ? 'Modify active market configurations and parameters' : 'Onboard structural item inventories into regional distribution channels'">
 </app-page-header>
 
 <div class="form-wrapper-grid">
-  <mat-card class="form-card">
-    <mat-card-content>
-      <form [formGroup]="productForm" (ngSubmit)="onSaveAsset()">
-        
-        <div class="form-row-dual">
-          <mat-form-field appearance="outline">
-            <mat-label>Inventory SKU Code</mat-label>
-            <input matInput formControlName="sku" placeholder="e.g., SKU-APP-12" />
-            @if (productForm.controls.sku.hasError('pattern')) {
-              <mat-error>Must match standardized pattern (e.g., SKU-APP-12)</mat-error>
-            }
-          </mat-form-field>
+ 
+      <form [formGroup]="productForm" (ngSubmit)="save()">
 
-          <mat-form-field appearance="outline">
-            <mat-label>Asset Classification Category</mat-label>
-            <mat-select formControlName="category">
-              <mat-option value="Software">Software Products</mat-option>
-              <mat-option value="Hardware">Hardware Infrastructure</mat-option>
-              <mat-option value="Services">Professional Services</mat-option>
-            </mat-select>
-          </mat-form-field>
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input id="title" type="text" placeholder="Title" formControlName="title">
         </div>
 
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Commercial Product Title</mat-label>
-          <input matInput formControlName="name" />
-        </mat-form-field>
-
-        <div class="form-row-three">
-          <mat-form-field appearance="outline">
-            <mat-label>Unit Evaluation Pricing (Rs)</mat-label>
-            <input matInput type="number" formControlName="price" />
-          </mat-form-field>
-
-          <mat-form-field appearance="outline">
-            <mat-label>Initial Allocation Quantity</mat-label>
-            <input matInput type="number" formControlName="stockQuantity" />
-          </mat-form-field>
-
-          <mat-form-field appearance="outline">
-            <mat-label>Lifecycle Strategy</mat-label>
-            <mat-select formControlName="status">
-              <mat-option value="Active">Active Market</mat-option>
-              <mat-option value="Draft">Draft Isolation</mat-option>
-              <mat-option value="Archived">Archived Status</mat-option>
-            </mat-select>
-          </mat-form-field>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" placeholder="Description" formControlName="description">
+          </textarea>
         </div>
 
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Technical Field Explanatory Description</mat-label>
-          <textarea matInput formControlName="description" rows="4" placeholder="Enter full specifications statement parameters..."></textarea>
-        </mat-form-field>
+        <div class="form-group">
+          <label for="category">Category</label>
+          <input id="category" type="text" placeholder="Category" formControlName="category">
+        </div>
 
-        <div class="form-actions">
-          <button mat-button type="button" routerLink="/admin/products">Cancel</button>
-          <button mat-flat-button color="primary" type="submit" [disabled]="productForm.invalid">
-            <mat-icon>save</mat-icon> {{!isEditMode() ? 'Submit':'Update'}}
+        <div class="form-group">
+          <label for="price">Price</label>
+          <input id="price" type="number" placeholder="Price" formControlName="price">
+        </div>
+
+        <div class="form-group">
+          <label for="discountPercentage">Discount Percentage</label>
+          <input id="discountPercentage" type="number" placeholder="Discount" formControlName="discountPercentage">
+        </div>
+
+        <div class="form-group">
+          <label for="rating">Rating</label>
+          <input id="rating" type="number" placeholder="Rating" formControlName="rating">
+        </div>
+
+        <div class="form-group">
+          <label for="stock">Stock</label>
+          <input id="stock" type="number" placeholder="Stock" formControlName="stock">
+        </div>
+
+        <div class="form-group">
+          <label for="brand">Brand</label>
+          <input id="brand" type="text" placeholder="Brand" formControlName="brand">
+        </div>
+
+        <div class="form-group">
+          <label for="sku">SKU</label>
+          <input id="sku" type="text" placeholder="SKU" formControlName="sku">
+        </div>
+
+        <div class="form-group">
+          <label for="weight">Weight</label>
+          <input id="weight" type="number" placeholder="Weight" formControlName="weight">
+        </div>
+
+        <div class="form-group">
+          <label for="warrantyInformation">Warranty Information</label>
+          <input id="warrantyInformation" type="text" placeholder="Warranty" formControlName="warrantyInformation">
+        </div>
+
+        <div class="form-group">
+          <label for="shippingInformation">Shipping Information</label>
+          <input id="shippingInformation" type="text" placeholder="Shipping" formControlName="shippingInformation">
+        </div>
+
+        <div class="form-group">
+          <label for="availabilityStatus">Availability Status</label>
+          <input id="availabilityStatus" type="text" placeholder="Availability" formControlName="availabilityStatus">
+        </div>
+
+        <div class="form-group">
+          <label for="returnPolicy">Return Policy</label>
+          <input id="returnPolicy" type="text" placeholder="Return Policy" formControlName="returnPolicy">
+        </div>
+
+        <div class="form-group">
+          <label for="minimumOrderQuantity">Minimum Order Quantity</label>
+          <input id="minimumOrderQuantity" type="number" placeholder="Minimum Order Quantity"
+            formControlName="minimumOrderQuantity">
+        </div>
+
+        <div class="form-group">
+          <label for="thumbnail">Thumbnail URL</label>
+          <input id="thumbnail" type="text" placeholder="Thumbnail" formControlName="thumbnail">
+        </div>
+
+        <!-- Dimensions -->
+        <div formGroupName="dimensions">
+          <h3>Dimensions</h3>
+
+          <div class="form-group">
+            <label for="width">Width</label>
+            <input id="width" type="number" placeholder="Width" formControlName="width">
+          </div>
+
+          <div class="form-group">
+            <label for="height">Height</label>
+            <input id="height" type="number" placeholder="Height" formControlName="height">
+          </div>
+
+          <div class="form-group">
+            <label for="depth">Depth</label>
+            <input id="depth" type="number" placeholder="Depth" formControlName="depth">
+          </div>
+        </div>
+
+        <!-- Meta -->
+        <div formGroupName="meta">
+          <h3>Meta</h3>
+          <div class="form-group">
+            <label for="createdAt">Created At</label>
+            <input id="createdAt" type="text" placeholder="Created At" formControlName="createdAt">
+          </div>
+
+          <div class="form-group">
+            <label for="updatedAt">Updated At</label>
+            <input id="updatedAt" type="text" placeholder="Updated At" formControlName="updatedAt">
+          </div>
+
+          <div class="form-group">
+            <label for="barcode">Barcode</label>
+            <input id="barcode" type="text" placeholder="Barcode" formControlName="barcode">
+          </div>
+
+          <div class="form-group">
+            <label for="qrCode">QR Code</label>
+            <input id="qrCode" type="text" placeholder="QR Code" formControlName="qrCode">
+          </div>
+        </div>
+
+        <!-- Tags -->
+        <div formArrayName="tags">
+          <h3>Tags</h3>
+
+          @for (tag of tags.controls; track $index) {
+          <div>
+            <input [formControlName]="$index">
+            <button type="button" class="remove-btn" (click)="removeTag($index)">
+              Remove
+            </button>
+          </div>
+          }
+
+          <button type="button" class="add-btn" (click)="addTag()">
+            Add Tag
           </button>
         </div>
 
-      </form>
-    </mat-card-content>
-  </mat-card>
+        <!-- Images -->
+        <div formArrayName="images">
+          <h3>Images</h3>
+
+          @for (image of images.controls; track $index) {
+          <div>
+            <img [src]="image.value" alt="{{image}}" width="100px">
+            <input [formControlName]="$index">
+            <button type="button" class="remove-btn" (click)="removeImage($index)">
+              Remove
+            </button>
+          </div>
+          }
+
+          <button type="button" class="add-btn" (click)="addImage()">
+            Add Image
+          </button>
+        </div>
+
+        <!-- Reviews -->
+        <h3>Reviews</h3>
+        <p>Reviews are always empty.</p>
+
+        <button type="submit" class="btn-primary">
+          {{ isEditMode ? 'Update Product' : 'Add Product' }}
+        </button>
+
+      </form> 
 </div>
