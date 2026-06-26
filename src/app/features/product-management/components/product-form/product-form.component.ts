@@ -8,9 +8,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
-import { ProductService } from '../../services/product.service';
+ 
 import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header.component';
+import { ProductService } from '../../../../core/services/product.service';
 
 @Component({
   selector: 'app-product-form',

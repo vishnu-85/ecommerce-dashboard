@@ -132,7 +132,7 @@ input:focus {
 
 .app-container {
   display: flex;
-  width: 99vw;
+  width: 100vw;
   height: 100vh;
   background: var(--color-light-mint);
 }
@@ -169,4 +169,6 @@ a {
 
 .main-content {
   padding: 1rem 2rem;
+  overflow: auto;
+  height: 100vh;
 }

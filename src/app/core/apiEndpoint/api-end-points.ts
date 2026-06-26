@@ -1,3 +1,4 @@
 export const APIENDPOINT ={
-    "products":"products"
+    "products":"products",
+    "categories":"categories"
 }

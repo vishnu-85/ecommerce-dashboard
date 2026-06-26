@@ -4,11 +4,11 @@ export const loadUser = createAction(
     '[GetUser]'
 )
 export const userSuccess = createAction(
-    '[Loaduser]',
+    '[load user Success]',
      props<{ users: any }>()
 )
 
 export const userFailure = createAction(
-    '[Loaduser]',
+    '[Load user Failure]',
     props<{ error: any }>()
 )

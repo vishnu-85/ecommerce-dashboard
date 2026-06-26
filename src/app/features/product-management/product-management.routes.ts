@@ -1,5 +1,5 @@
-import { Routes } from '@angular/router';
-import { ProductService } from './services/product.service';
+import { Routes } from '@angular/router'; 
+import { ProductService } from '../../core/services/product.service';
 
 export const PRODUCT_ROUTES: Routes = [
   {
