@@ -71,17 +71,13 @@ export class ProductFormComponent implements OnInit {
       category: [''],
       price: [0],
       discountPercentage: [0],
-      rating: [0],
       stock: [0],
-
       brand: [''],
       sku: [''],
       weight: [0],
-
       warrantyInformation: [''],
       shippingInformation: [''],
       availabilityStatus: [''],
-
       returnPolicy: [''],
       minimumOrderQuantity: [0],
 
@@ -115,7 +111,7 @@ export class ProductFormComponent implements OnInit {
       category: product.category,
       price: product.price,
       discountPercentage: product.discountPercentage,
-      rating: product.rating,
+
       stock: product.stock,
       brand: product.brand,
       sku: product.sku,
@@ -140,8 +136,7 @@ export class ProductFormComponent implements OnInit {
       this.images.push(this.fb.control(image));
     });
 
-     
-    this.reviews.clear();
+  
   }
 
   get tags() {
@@ -150,10 +145,6 @@ export class ProductFormComponent implements OnInit {
 
   get images() {
     return this.productForm.get('images') as FormArray;
-  }
-
-  get reviews() {
-    return this.productForm.get('reviews') as FormArray;
   }
 
   addTag() {
