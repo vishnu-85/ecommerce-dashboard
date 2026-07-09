@@ -18,7 +18,6 @@ export interface Product {
   warrantyInformation: string;
   shippingInformation: string;
   availabilityStatus: string;
-  reviews: Review[];
   returnPolicy: string;
   minimumOrderQuantity: number;
   meta: Meta;

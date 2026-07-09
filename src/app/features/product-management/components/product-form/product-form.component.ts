@@ -11,7 +11,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header.component';
 import { ProductService } from '../../../../core/services/product.service';
-import { Product } from '../../../../core/models/product.models';
 
 @Component({
   selector: 'app-product-form',
@@ -105,8 +104,6 @@ export class ProductFormComponent implements OnInit {
 
       thumbnail: [''],
 
-      // Always empty
-      reviews: this.fb.array([]),
     });
   }
 

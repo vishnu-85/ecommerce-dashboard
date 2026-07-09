@@ -10,7 +10,7 @@ import * as AuthActions from '../../features/auth/store/auth.actions'
   standalone: true,
   template: `<aside>
     <div class="logo-area">
-      <div class="logo-img"><img src="../../../assets/logo_ai.png" alt=""></div>
+      <div class="logo-img"><img src="../../../assets/logo.png" alt=""></div>
     </div> 
     <nav class="history">
       <a routerLink="dashboard"><div class="nav-item">Dashboard</div></a>
@@ -19,6 +19,9 @@ import * as AuthActions from '../../features/auth/store/auth.actions'
       <a routerLink="category"><div class="nav-item">Category</div></a>
       <a routerLink="customers"><div class="nav-item">Customers</div></a>
     </nav>
+    <div class="logout">
+      <button class="btn-primary" (click)="logout()">Logout</button>
+    </div>
   </aside>
 `
 })

@@ -11,9 +11,9 @@ html {
 }
 
 :root {
-  --color-primary-teal: #1ABC9C;
+  --color-primary-teal: #e21817;
   --color-mint-btn: #E8F8F5;
-  --color-text-dark: #121212;
+  --color-text-dark: #001f3e;
   --color-text-light: #ffffff;
   --color-border-light: #dddddd;
   --color-hover-light: #e2ecea;
@@ -34,11 +34,11 @@ p{
 }
 
 .bg-gradient {
-  background: linear-gradient(98.45deg, #1E3A5F 0%, #1ABC9C 100%);
+  background: linear-gradient(98.45deg, #001f3e 0%, #e21817 100%);
 }
 
 .btn-gradient {
-  background: linear-gradient(100.93deg, #17C3A9 8.18%, #19CF8E 92.72%);
+  background: linear-gradient(100.93deg, #e21817 8.18%, #001f3e 92.72%);
 }
 
 .d-none{
@@ -54,7 +54,7 @@ p{
   align-items: center;
   justify-content: center;
   color: var(--color-text-dark);
-  background: linear-gradient(98.45deg, #1E3A5F 0%, #1ABC9C 100%);
+  background: linear-gradient(98.45deg, #001f3e 0%, #e21817 100%);
   font-family: 'Segoe UI', sans-serif;
 }
 
@@ -71,11 +71,17 @@ p{
   }
 
   .logo-img img {
-    width: 100px;
-    height: 90px;
+    width: 220px;
+    // height: 90px;
   }
 }
 
+.logout{
+    position: absolute;
+    bottom: 0;
+    left: 15px;
+    right: 15px;
+}
 .login-card {
   background: var(--color-text-light);
   padding: 2.5rem;
@@ -115,7 +121,7 @@ textarea{
 .btn-primary {
   width: 100%;
   padding: 12px;
-  background: linear-gradient(100.93deg, #17C3A9 8.18%, #19CF8E 92.72%);
+  background: linear-gradient(100.93deg, #e21817 8.18%, #001f3e 92.72%);
   color: var(--color-text-light);
   border: none;
   border-radius: 8px;
@@ -126,7 +132,7 @@ textarea{
 }
 
 .btn-primary:hover {
-  background: linear-gradient(100.93deg, #19CF8E 8.18%, #17C3A9 92.72%);
+  background: linear-gradient(100.93deg, #e21817 8.18%, #001f3e 92.72%);
   transform: translateY(-2px);
 }
 
@@ -160,6 +166,7 @@ button{
 }
 
 .sidebar {
+    position: relative;
     width: 15%;
     background-color: var(--color-light-mint);
     padding: 20px;
